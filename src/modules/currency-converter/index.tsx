@@ -243,7 +243,7 @@ export const CurrencyConverter: React.FC = () => {
             )}
 
             {/* Currency Selectors & Swap Button Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] items-center gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] items-center gap-1.5">
               {/* FROM Currency */}
               <CurrencySelector
                 label="From"
@@ -257,9 +257,8 @@ export const CurrencyConverter: React.FC = () => {
                   type="button"
                   onClick={handleSwapCurrencies}
                   title="Swap currencies"
-                  className={`p-3 rounded-2xl bg-slate-800 hover:bg-slate-700/90 text-emerald-400 border border-slate-700 shadow-md transition-all cursor-pointer active:scale-90 ${
-                    isSwapping ? 'rotate-180 duration-300' : 'duration-150'
-                  }`}
+                  className={`p-3 rounded-2xl bg-slate-800 hover:bg-slate-700/90 text-emerald-400 border border-slate-700 shadow-md transition-all cursor-pointer active:scale-90 ${isSwapping ? 'rotate-180 duration-300' : 'duration-150'
+                    }`}
                 >
                   <ArrowLeftRight className="w-4 h-4" />
                 </button>
@@ -311,11 +310,10 @@ export const CurrencyConverter: React.FC = () => {
                     playFeedback.click();
                     setAmountStr(amt.toString());
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold border transition-all shrink-0 cursor-pointer active:scale-95 ${
-                    amount === amt
+                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold border transition-all shrink-0 cursor-pointer active:scale-95 ${amount === amt
                       ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 font-bold'
                       : 'bg-slate-800/80 hover:bg-slate-700 text-slate-300 border-slate-700'
-                  }`}
+                    }`}
                 >
                   {amt >= 1000 ? `${amt / 1000}k` : amt}
                 </button>

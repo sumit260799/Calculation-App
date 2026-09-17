@@ -23,25 +23,18 @@ export const RateModeSelector: React.FC<RateModeSelectorProps> = ({
   fromCurrency,
   toCurrency,
 }) => {
-  // Local string states to allow typing, clearing (backspacing) without auto-prefill jumping
+  // Local string state to allow typing, clearing (backspacing) without auto-prefill jumping
   const [bataInput, setBataInput] = useState<string>(() => {
     const rate = customRate > 0 ? customRate : liveRate;
     return rate > 0 ? (rate * 100).toFixed(2).replace(/\.?0+$/, '') : '';
-  });
-
-  const [directRateInput, setDirectRateInput] = useState<string>(() => {
-    const rate = customRate > 0 ? customRate : liveRate;
-    return rate > 0 ? rate.toString() : '';
   });
 
   // Keep strings synced when currencies change or liveRate loads
   useEffect(() => {
     if (customRate > 0) {
       setBataInput((customRate * 100).toFixed(4).replace(/0+$/, '').replace(/\.$/, ''));
-      setDirectRateInput(customRate.toString());
     } else if (liveRate > 0) {
       setBataInput((liveRate * 100).toFixed(4).replace(/0+$/, '').replace(/\.$/, ''));
-      setDirectRateInput(liveRate.toString());
     }
   }, [fromCurrency, toCurrency, liveRate]);
 
@@ -52,7 +45,6 @@ export const RateModeSelector: React.FC<RateModeSelectorProps> = ({
       const initial = liveRate > 0 ? liveRate : 1;
       onCustomRateChange(initial);
       setBataInput((initial * 100).toFixed(4).replace(/0+$/, '').replace(/\.$/, ''));
-      setDirectRateInput(initial.toString());
     }
   };
 
@@ -62,29 +54,11 @@ export const RateModeSelector: React.FC<RateModeSelectorProps> = ({
       setBataInput(valStr);
       if (valStr === '' || valStr === '.') {
         onCustomRateChange(0);
-        setDirectRateInput('');
       } else {
         const parsed = parseFloat(valStr);
         if (!isNaN(parsed) && parsed >= 0) {
           const newRate = parsed / 100;
           onCustomRateChange(newRate);
-          setDirectRateInput(newRate.toString());
-        }
-      }
-    }
-  };
-
-  const handleDirectRateChange = (valStr: string) => {
-    if (valStr === '' || /^[0-9]*\.?[0-9]*$/.test(valStr)) {
-      setDirectRateInput(valStr);
-      if (valStr === '' || valStr === '.') {
-        onCustomRateChange(0);
-        setBataInput('');
-      } else {
-        const parsed = parseFloat(valStr);
-        if (!isNaN(parsed) && parsed >= 0) {
-          onCustomRateChange(parsed);
-          setBataInput((parsed * 100).toFixed(4).replace(/0+$/, '').replace(/\.$/, ''));
         }
       }
     }
@@ -95,27 +69,9 @@ export const RateModeSelector: React.FC<RateModeSelectorProps> = ({
     onCustomRateChange(liveRate);
     const bataVal = (liveRate * 100).toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
     setBataInput(bataVal);
-    setDirectRateInput(liveRate.toString());
-  };
-
-  const handlePresetClick = (p: number) => {
-    playFeedback.click();
-    const newRate = p / 100;
-    onCustomRateChange(newRate);
-    setBataInput(p.toString());
-    setDirectRateInput(newRate.toString());
   };
 
   const activeRate = customRate > 0 ? customRate : (bataInput ? parseFloat(bataInput) / 100 : liveRate);
-  const currentBataNum = bataInput ? parseFloat(bataInput) : (liveRate * 100);
-  const roundedBata = Math.round(currentBataNum || 100);
-  const presets = [
-    roundedBata - 4,
-    roundedBata - 2,
-    roundedBata,
-    roundedBata + 2,
-    roundedBata + 4,
-  ].filter((p) => p > 0);
 
   return (
     <div className="space-y-3 p-3.5 sm:p-4 rounded-2xl bg-slate-900/70 border border-slate-800/80 shadow-sm">
@@ -217,45 +173,6 @@ export const RateModeSelector: React.FC<RateModeSelectorProps> = ({
               <span className="font-mono text-slate-300">
                 1 {fromCurrency} = {formatRate(activeRate, 3)} {toCurrency}
               </span>
-            </div>
-          </div>
-
-          {/* Quick Bata / Ratio Presets */}
-          <div className="space-y-1">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-              Quick Bata Ratios:
-            </span>
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none">
-              {presets.map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => handlePresetClick(p)}
-                  className={`px-3 py-1 text-xs font-mono font-semibold rounded-lg border transition-all cursor-pointer ${
-                    Math.abs(currentBataNum - p) < 0.01
-                      ? 'bg-amber-500/25 text-amber-300 border-amber-500/60 font-bold'
-                      : 'bg-slate-950/70 hover:bg-slate-800 text-slate-400 border-slate-800'
-                  }`}
-                >
-                  {p}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Secondary Field: Exact Rate per 1 unit */}
-          <div className="pt-2 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-            <span>Direct rate (1 {fromCurrency}):</span>
-            <div className="flex items-center gap-1 w-32">
-              <input
-                type="text"
-                inputMode="decimal"
-                value={directRateInput}
-                onChange={(e) => handleDirectRateChange(e.target.value)}
-                placeholder="0"
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-slate-200 text-right placeholder-slate-600 focus:outline-none focus:border-amber-500/50"
-              />
-              <span className="text-[11px] font-mono shrink-0">{toCurrency}</span>
             </div>
           </div>
         </div>
