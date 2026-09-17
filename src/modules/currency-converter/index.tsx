@@ -61,7 +61,7 @@ export const CurrencyConverter: React.FC = () => {
     return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
   }, [amountStr]);
 
-  const [rateMode, setRateMode] = useState<RateMode>('live');
+  const [rateMode, setRateMode] = useState<RateMode>('custom');
   const [customRate, setCustomRate] = useState<number>(0);
 
   const [favorites, setFavorites] = useState<CurrencyPair[]>(getFavoritePairs);

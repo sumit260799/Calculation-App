@@ -93,24 +93,24 @@ export const HistoricalRateChart: React.FC<HistoricalRateChartProps> = ({
   return (
     <div className="rounded-2xl bg-slate-900/60 border border-slate-800/80 p-4 shadow-sm space-y-3.5">
       {/* Header and Period Buttons */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+      <div className="flex flex-wrap items-center justify-between gap-2.5 pb-2.5 border-b border-slate-800">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
             <LineChart className="w-4 h-4" />
           </div>
-          <div>
-            <h3 className="text-sm font-bold text-slate-100 my-0">
-              {fromCurrency} to {toCurrency} Rate History
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-slate-100 whitespace-nowrap my-0">
+              {fromCurrency} to {toCurrency} History
             </h3>
-            <span className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
-              <Calendar className="w-3 h-3" />
-              {dayjs(startDate).format('MMM D, YYYY')} – {dayjs(endDate).format('MMM D, YYYY')}
+            <span className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5 whitespace-nowrap">
+              <Calendar className="w-3 h-3 shrink-0" />
+              {dayjs(startDate).format('MMM D')} – {dayjs(endDate).format('MMM D, YYYY')}
             </span>
           </div>
         </div>
 
         {/* Period Selector Tabs */}
-        <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800/80 self-start sm:self-auto">
+        <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800/80 shrink-0">
           {PERIODS.map((p) => (
             <button
               key={p.value}

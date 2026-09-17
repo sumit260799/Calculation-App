@@ -28,7 +28,7 @@ export const Tabs: React.FC<TabsProps> = ({
     <div
       className={twMerge(
         clsx(
-          variant === 'pills' && 'flex p-1.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 gap-1 overflow-x-auto',
+          variant === 'pills' && 'flex p-1 bg-slate-900/90 rounded-2xl border border-slate-800/80 gap-1 w-full',
           variant === 'underline' && 'flex border-b border-slate-800 gap-4 overflow-x-auto',
           className
         )
@@ -39,14 +39,15 @@ export const Tabs: React.FC<TabsProps> = ({
         return (
           <button
             key={tab.id}
+            type="button"
             onClick={() => onChange(tab.id)}
             className={twMerge(
               clsx(
-                'flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 rounded-xl whitespace-nowrap cursor-pointer select-none',
+                'flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium transition-all duration-150 rounded-xl whitespace-nowrap cursor-pointer select-none',
                 variant === 'pills' && [
                   isActive
                     ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/20 font-semibold'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent'
                 ],
                 variant === 'underline' && [
                   'pb-3 border-b-2 -mb-px rounded-none',

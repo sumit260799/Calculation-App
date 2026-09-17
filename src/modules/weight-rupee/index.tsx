@@ -129,15 +129,15 @@ export const WeightRupeeCalculator: React.FC = () => {
       {/* 2. Switcher Tabs */}
       <Tabs
         tabs={[
-          { id: 'weight-to-price', label: 'Weight → ₹ Price', icon: <Layers className="w-4 h-4" /> },
-          { id: 'price-to-weight', label: 'Budget ₹ → Weight', icon: <IndianRupee className="w-4 h-4" /> },
+          { id: 'weight-to-price', label: 'Weight → Price', icon: <Layers className="w-4 h-4" /> },
+          { id: 'price-to-weight', label: 'Budget → Weight', icon: <IndianRupee className="w-4 h-4" /> },
         ]}
         activeTab={calcMode}
         onChange={(tab) => {
           playFeedback.click();
           setCalcMode(tab as 'weight-to-price' | 'price-to-weight');
         }}
-        className="w-full justify-center"
+        className="w-full"
       />
 
       {/* 3. Active Mode Card */}
