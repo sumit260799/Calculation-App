@@ -8,6 +8,7 @@ import {
   Star,
   ArrowLeft,
   ChevronRight,
+  Globe,
 } from "lucide-react";
 import { playFeedback } from "./utils/feedback";
 
@@ -15,6 +16,12 @@ const ICONS_CONFIG: Record<
   string,
   { icon: React.ReactNode; bg: string; text: string; border: string }
 > = {
+  Globe: {
+    icon: <Globe className="w-6 h-6 text-sky-400" />,
+    bg: "bg-sky-500/10",
+    text: "text-sky-400",
+    border: "border-sky-500/20",
+  },
   Scale: {
     icon: <Scale className="w-6 h-6 text-emerald-400" />,
     bg: "bg-emerald-500/10",
@@ -51,9 +58,13 @@ export const App: React.FC = () => {
     }
   });
 
-  // Current view: if default is set, open directly to calculator, else menu
+  // Current view: if default is set or URL has currency query params, open directly to calculator, else menu
   const [currentView, setCurrentView] = useState<"menu" | "calculator">(() => {
     try {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.has('from') || searchParams.has('to')) {
+        return 'calculator';
+      }
       const savedDefault = localStorage.getItem("pricescale_default_calc");
       if (
         savedDefault &&
@@ -70,6 +81,10 @@ export const App: React.FC = () => {
   // Active module
   const [activeModuleId, setActiveModuleId] = useState<string>(() => {
     try {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.has('from') || searchParams.has('to')) {
+        return 'currency-converter';
+      }
       const savedDefault = localStorage.getItem("pricescale_default_calc");
       if (
         savedDefault &&
@@ -80,7 +95,7 @@ export const App: React.FC = () => {
     } catch {
       // ignore
     }
-    return "weight-rupee";
+    return "currency-converter";
   });
 
   const handleToggleDefault = (id: string, e?: React.MouseEvent) => {
@@ -208,7 +223,7 @@ export const App: React.FC = () => {
 
       {/* VIEW 2: ACTIVE CALCULATION PAGE */}
       {currentView === "calculator" && (
-        <div className="w-full max-w-md mx-auto px-3.5 py-4 flex-1 flex flex-col">
+        <div className={`w-full ${activeModule.id === 'currency-converter' ? 'max-w-5xl' : 'max-w-md'} mx-auto px-3.5 py-4 flex-1 flex flex-col`}>
           {/* Mobile Top Navigation Bar */}
           <div className="flex items-center justify-between gap-2 mb-4 bg-slate-900/90 border border-slate-800/90 px-3.5 py-2.5 rounded-2xl backdrop-blur-md shadow-lg">
             {/* Back to Menu */}

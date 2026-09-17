@@ -3,8 +3,20 @@ import { WeightRupeeCalculator } from '../modules/weight-rupee';
 import { UniversalUnitConverter } from '../modules/unit-converter';
 import { GoldRateCalculator } from '../modules/gold-rate';
 import { LakhCroreConverter } from '../modules/lakh-crore';
+import { CurrencyConverter } from '../modules/currency-converter';
 
 export const CALCULATOR_MODULES: CalculatorModule[] = [
+  {
+    id: 'currency-converter',
+    name: 'Live Currency Converter',
+    shortName: 'Currency Ex',
+    description: 'Convert world currencies with live rates, historical trends, custom ratios & rate adjustments.',
+    category: 'currency-finance',
+    iconName: 'Globe',
+    badge: 'Live',
+    isPopular: true,
+    component: CurrencyConverter,
+  },
   {
     id: 'weight-rupee',
     name: 'Weight & Price Calculator',
