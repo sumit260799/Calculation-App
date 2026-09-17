@@ -6,9 +6,7 @@ import {
   Share2,
   Check,
   RefreshCw,
-  Sparkles,
   AlertCircle,
-  TrendingUp,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { currencyService, type RateResult } from '../../services/currencyService';

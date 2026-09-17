@@ -5,7 +5,6 @@ import {
   POPULAR_CURRENCIES,
   getCurrencyMeta,
   searchCurrencies,
-  type CurrencyMeta,
 } from '../../../data/currencies';
 import { playFeedback } from '../../../utils/feedback';
 

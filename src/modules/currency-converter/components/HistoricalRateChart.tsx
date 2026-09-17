@@ -34,7 +34,6 @@ export const HistoricalRateChart: React.FC<HistoricalRateChartProps> = ({
   toCurrency,
 }) => {
   const [period, setPeriod] = useState<HistoricalPeriod>('1M');
-  const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
   const selectedPeriodConfig = PERIODS.find((p) => p.value === period) || PERIODS[1];
 
@@ -52,7 +51,7 @@ export const HistoricalRateChart: React.FC<HistoricalRateChartProps> = ({
       currencyService.getHistoricalRates(fromCurrency, toCurrency, startDate, endDate),
     staleTime: 1000 * 60 * 30, // 30 minutes
     gcTime: 1000 * 60 * 60 * 2, // 2 hours
-    enabled: isExpanded && Boolean(fromCurrency) && Boolean(toCurrency) && fromCurrency !== toCurrency,
+    enabled: Boolean(fromCurrency) && Boolean(toCurrency) && fromCurrency !== toCurrency,
   });
 
   const chartData = useMemo(() => {

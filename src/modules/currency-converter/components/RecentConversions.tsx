@@ -58,7 +58,6 @@ export const RecentConversions: React.FC<RecentConversionsProps> = ({
       <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
         {recents.map((item) => {
           const fromMeta = getCurrencyMeta(item.from);
-          const toMeta = getCurrencyMeta(item.to);
           const isCopied = copiedId === item.id;
 
           return (

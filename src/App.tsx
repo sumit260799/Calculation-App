@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { CALCULATOR_MODULES } from "./registry/calculators";
 import {
   Scale,

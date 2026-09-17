@@ -8,7 +8,6 @@ import {
   getEffectiveRate,
   formatCurrencyAmount,
   formatRate,
-  roundToPrecision,
 } from './currency';
 
 describe('Currency Conversion Engine', () => {

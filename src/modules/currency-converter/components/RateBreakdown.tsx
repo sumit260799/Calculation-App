@@ -86,6 +86,15 @@ export const RateBreakdown: React.FC<RateBreakdownProps> = ({
         </span>
       </div>
 
+      {mode !== 'live' && (
+        <div className="p-2 rounded-xl bg-slate-950/40 border border-slate-850 flex justify-between items-center text-[11px] text-slate-400 font-mono">
+          <span className="text-slate-400">Live Market Benchmark:</span>
+          <span className="text-slate-300 font-semibold">
+            1 {fromCurrency} = {formatRate(liveRate, 3)} {toCurrency}
+          </span>
+        </div>
+      )}
+
       {/* Attribution and Timestamp */}
       <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-[11px] text-slate-400">
         <div className="flex items-center gap-1.5">

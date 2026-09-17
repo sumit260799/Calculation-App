@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { Select } from '../../components/ui/Select';
-import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { Copy, Check } from 'lucide-react';
 import { formatIndianCurrency } from '../weight-rupee/utils';
